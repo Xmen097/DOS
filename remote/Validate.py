@@ -1,0 +1,17 @@
+import math
+
+bit_limit = 12
+
+validate = [0xF3, 0xFC, 0x333, 0x33C, 0x3C3, 0x3CC, 0x553, 0x55C, 0x5A3, 0x5AC, 0x663, 0x66C, 0x693, 0x69C, 0x963, 0x96C, 0x993, 0x99C, 0xA53, 0xA5C, 0xAA3, 0xAAC, 0xC33, 0xC3C, 0xCC3, 0xCCC, 0xF03, 0xF0C]
+
+def one_count(bin):
+    one_cout = 0
+    for a in range(1,bit_limit+1):
+        one_cout += math.floor( bin/2**(a-1))%2
+    return one_cout
+
+
+for default in validate:
+    for comp in validate:
+        if one_count(comp ^ default) < 4 and default != comp:
+            print("ERROR! {:x} and {:x}".format(default, comp))
